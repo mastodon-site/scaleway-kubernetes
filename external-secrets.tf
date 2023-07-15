@@ -10,7 +10,7 @@ resource "scaleway_iam_api_key" "external_secrets" {
 resource "kubernetes_secret" "scaleway_secret_manager_credentials" {
   metadata {
     name      = "scaleway-secret-manager-credentials"
-    namespace = kubernetes_namespace.platform.metadata.0.name
+    namespace = kubernetes_namespace.platform.metadata.[0].name
   }
 
   data = {
@@ -32,13 +32,13 @@ resource "scaleway_iam_policy" "external_secrets" {
 }
 
 resource "kubernetes_manifest" "secret_manager_store" {
-  manifest = {
+  manifest = [{
     "apiVersion" = "external-secrets.io/v1beta1"
     "kind"       = "SecretStore"
-    "metadata" = {
+    "metadata" = [{
       "name"      = "secret-manager"
-      "namespace" = kubernetes_namespace.platform.metadata.0.name
-    }
+      "namespace" = kubernetes_namespace.platform.metadata.[0].name
+    }]
     "spec" = {
       "provider" = {
         "scaleway" = {
@@ -61,6 +61,6 @@ resource "kubernetes_manifest" "secret_manager_store" {
         }
       }
     }
-  }
+  }]
   depends_on = [kubernetes_namespace.platform, kubernetes_secret.scaleway_secret_manager_credentials]
 }
