@@ -77,6 +77,19 @@ variable "kubernetes_cluster_name" {
   type        = string
 }
 
+variable "kubernetes_node_pools" {
+  description = "Node pool(s) to create for this Kubernetes cluster"
+  type        = list(map(string))
+  default = [{
+    node_type   = "play2_nano"
+    autoscaling = true
+    autohealing = true
+    size        = 1
+    min_size    = 2
+    max_size    = 10
+  }]
+}
+
 variable "private_network_id" {
   description = "ID of the private network in which to place the Redis cluster"
   type        = string

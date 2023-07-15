@@ -25,13 +25,14 @@ resource "scaleway_k8s_cluster" "cluster" {
   }
 }
 
-resource "scaleway_k8s_pool" "pool" {
+resource "scaleway_k8s_pool" "pools" {
+  for_each    = { for config in var.kubernetes_node_pools : config.node_type => config }
   cluster_id  = scaleway_k8s_cluster.cluster.id
-  name        = "cluster"
-  node_type   = "play2_nano"
-  autoscaling = true
-  autohealing = true
-  size        = 1
-  min_size    = 2
-  max_size    = 10
+  name        = each.value.node_type
+  node_type   = each.value.node_type
+  autoscaling = each.value.autoscaling
+  autohealing = each.value.autohealing
+  size        = each.value.size
+  min_size    = each.value.min_size
+  max_size    = each.value.max_size
 }
