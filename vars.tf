@@ -20,29 +20,29 @@ variable "scaleway_zone" {
 ############################
 ##### Module variables #####
 
-variable "flux_resources_helm_controller_cpu" {
-  description = "CPU resources to set for helm-controller"
-  type        = string
-  default     = "1"
-}
+# variable "flux_resources_helm_controller_cpu" {
+#   description = "CPU resources to set for helm-controller"
+#   type        = string
+#   default     = "1"
+# }
 
-variable "flux_resources_helm_controller_memory" {
-  description = "Memory resources to set for helm-controller"
-  type        = string
-  default     = "2Gi"
-}
+# variable "flux_resources_helm_controller_memory" {
+#   description = "Memory resources to set for helm-controller"
+#   type        = string
+#   default     = "2Gi"
+# }
 
-variable "flux_resources_source_controller_cpu" {
-  description = "CPU resources to set for source-controller"
-  type        = string
-  default     = "1"
-}
+# variable "flux_resources_source_controller_cpu" {
+#   description = "CPU resources to set for source-controller"
+#   type        = string
+#   default     = "1"
+# }
 
-variable "flux_resources_source_controller_memory" {
-  description = "Memory resources to set for source-controller"
-  type        = string
-  default     = "2Gi"
-}
+# variable "flux_resources_source_controller_memory" {
+#   description = "Memory resources to set for source-controller"
+#   type        = string
+#   default     = "2Gi"
+# }
 
 variable "flux_secret_manager_secret_id" {
   description = "ID of the secret in Secret Manager that has the SSH key for Flux (latest version is used)"
