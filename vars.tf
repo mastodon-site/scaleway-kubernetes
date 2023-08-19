@@ -87,7 +87,7 @@ variable "kubernetes_node_pools" {
   description = "Node pool(s) to create for this Kubernetes cluster"
   type        = list(map(string))
   default = [{
-    node_type   = "play2_nano"
+    node_type   = "play2_micro"
     autoscaling = true
     autohealing = true
     size        = 1
