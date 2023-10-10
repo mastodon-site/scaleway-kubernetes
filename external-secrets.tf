@@ -61,5 +61,5 @@ resource "kubernetes_manifest" "secret_manager_store" {
       }
     }
   }
-  depends_on = [kubernetes_secret.scaleway_secret_manager_credentials]
+  depends_on = [kubernetes_secret.scaleway_secret_manager_credentials, scaleway_k8s_cluster.cluster]
 }
