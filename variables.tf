@@ -1,3 +1,20 @@
+
+############################
+#### Scaleway variables ####
+
+variable "scaleway_project_id" {
+  description = "Scaleway project ID"
+  type        = string
+}
+
+variable "scaleway_region" {
+  description = "Scaleway region ID"
+  type        = string
+}
+
+############################
+##### Module variables #####
+
 # variable "flux_resources_helm_controller_cpu" {
 #   description = "CPU resources to set for helm-controller"
 #   type        = string
