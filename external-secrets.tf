@@ -17,49 +17,19 @@ resource "scaleway_iam_policy" "external_secrets" {
   }
 }
 
-resource "kubernetes_secret" "scaleway_secret_manager_credentials" {
-  metadata {
-    name      = "scaleway-secret-manager-credentials"
-    namespace = "kube-system"
-  }
+# resource "kubernetes_secret" "scaleway_secret_manager_credentials" {
+#   metadata {
+#     name      = "scaleway-secret-manager-credentials"
+#     namespace = "kube-system"
+#   }
 
-  data = {
-    access-key        = scaleway_iam_api_key.external_secrets.access_key
-    secret-access-key = scaleway_iam_api_key.external_secrets.secret_key
-  }
-}
+#   data = {
+#     access-key        = scaleway_iam_api_key.external_secrets.access_key
+#     secret-access-key = scaleway_iam_api_key.external_secrets.secret_key
+#   }
 
-resource "kubernetes_manifest" "secret_manager_store" {
-  manifest = {
-    "apiVersion" = "external-secrets.io/v1beta1"
-    "kind"       = "ClusterSecretStore"
-    "metadata" = {
-      "name" = "secret-manager"
-    }
-    "spec" = {
-      "provider" = {
-        "scaleway" = {
-          "region"    = var.scaleway_region
-          "projectId" = var.scaleway_project_id
-
-          "accessKey" = {
-            "secretRef" = {
-              "name"      = "scaleway-secret-manager-credentials"
-              "namespace" = "kube-system"
-              "key"       = "access-key"
-            }
-          }
-
-          "secretKey" = {
-            "secretRef" = {
-              "name"      = "scaleway-secret-manager-credentials"
-              "namespace" = "kube-system"
-              "key"       = "secret-access-key"
-            }
-          }
-        }
-      }
-    }
-  }
-  depends_on = [kubernetes_secret.scaleway_secret_manager_credentials, scaleway_k8s_cluster.cluster]
-}
+#   depends_on = [
+#     scaleway_k8s_cluster.cluster,
+#     scaleway_k8s_pool.pools,
+#   ]
+# }

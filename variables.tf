@@ -86,8 +86,12 @@ variable "kubernetes_node_pools" {
     max_size    = 10
   }]
 }
-
 variable "private_network_id" {
   description = "ID of the private network in which to place the Redis cluster"
   type        = string
+}
+
+variable "load_balancer_zones" {
+  description = "List of zones in which to provision the cluster's load balancer (empty list is valid)"
+  default     = ["fr-par-1", "fr-par-2"]
 }

@@ -16,10 +16,6 @@ terraform {
       source  = "gavinbunney/kubectl"
       version = ">= 1.13.0"
     }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = ">= 2.0.2"
-    }
     scaleway = {
       source  = "scaleway/scaleway"
       version = ">= 2.24"
