@@ -1,7 +1,7 @@
 resource "scaleway_k8s_cluster" "cluster" {
   name                        = var.kubernetes_cluster_name
   type                        = "kapsule"
-  version                     = "1.30"
+  version                     = "1.31"
   cni                         = "cilium"
   delete_additional_resources = true
   private_network_id          = var.private_network_id
