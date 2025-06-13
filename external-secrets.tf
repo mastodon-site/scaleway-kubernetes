@@ -31,7 +31,7 @@ resource "kubernetes_secret" "scaleway_secret_manager_credentials" {
 
 resource "kubernetes_manifest" "secret_manager_store" {
   manifest = {
-    "apiVersion" = "external-secrets.io/v1beta1"
+    "apiVersion" = "external-secrets.io/v1"
     "kind"       = "ClusterSecretStore"
     "metadata" = {
       "name" = "secret-manager"
