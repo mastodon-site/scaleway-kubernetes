@@ -72,6 +72,12 @@ variable "kubernetes_cluster_name" {
   type        = string
 }
 
+variable "kubernetes_cluster_version" {
+  description = "Version of the Kubernetes cluster to create"
+  type        = string
+  default     = "1.34"
+}
+
 variable "kubernetes_node_pools" {
   description = "Node pool(s) to create for this Kubernetes cluster"
   type        = list(map(string))
