@@ -94,6 +94,21 @@ variable "kubernetes_node_pools" {
 }
 
 variable "private_network_id" {
-  description = "ID of the private network in which to place the Redis cluster"
+  description = "ID of the private network in which to place the Kubernetes cluster"
   type        = string
+}
+
+##############################
+## Load Balancer variables ###
+
+variable "create_lb" {
+  description = "Whether to create the ingress load balancer"
+  type        = bool
+  default     = true
+}
+
+variable "lb_type" {
+  description = "Type of the Scaleway Load Balancer (e.g. LB-S, LB-GP-M)"
+  type        = string
+  default     = "LB-S"
 }
