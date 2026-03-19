@@ -29,3 +29,10 @@ instance:
             value:
               - key: "CriticalAddonsOnly"
                 operator: "Exists"
+      - target:
+          kind: Deployment
+          name: helm-controller
+        patch: |
+          - op: add
+            path: /spec/template/spec/containers/0/args/-
+            value: --concurrent=30

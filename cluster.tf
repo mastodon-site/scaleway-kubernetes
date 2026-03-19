@@ -1,5 +1,6 @@
 resource "scaleway_k8s_cluster" "cluster" {
   name                        = var.kubernetes_cluster_name
+  region                      = var.scaleway_region
   type                        = "kapsule"
   version                     = var.kubernetes_cluster_version
   cni                         = "cilium"

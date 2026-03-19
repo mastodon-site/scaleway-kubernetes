@@ -5,6 +5,7 @@ resource "helm_release" "flux_operator" {
   chart            = "flux-operator"
   version          = "0.43.0"
   create_namespace = true
+  depends_on       = [scaleway_k8s_pool.pools]
 }
 
 resource "kubernetes_secret" "flux_git_credentials" {
