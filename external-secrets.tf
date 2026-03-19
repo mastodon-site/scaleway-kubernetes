@@ -29,37 +29,4 @@ resource "kubernetes_secret" "scaleway_secret_manager_credentials" {
   }
 }
 
-resource "kubernetes_manifest" "secret_manager_store" {
-  manifest = {
-    "apiVersion" = "external-secrets.io/v1"
-    "kind"       = "ClusterSecretStore"
-    "metadata" = {
-      "name" = "secret-manager"
-    }
-    "spec" = {
-      "provider" = {
-        "scaleway" = {
-          "region"    = var.scaleway_region
-          "projectId" = var.scaleway_project_id
-
-          "accessKey" = {
-            "secretRef" = {
-              "name"      = "scaleway-secret-manager-credentials"
-              "namespace" = "kube-system"
-              "key"       = "access-key"
-            }
-          }
-
-          "secretKey" = {
-            "secretRef" = {
-              "name"      = "scaleway-secret-manager-credentials"
-              "namespace" = "kube-system"
-              "key"       = "secret-access-key"
-            }
-          }
-        }
-      }
-    }
-  }
-  depends_on = [kubernetes_secret.scaleway_secret_manager_credentials, scaleway_k8s_cluster.cluster]
-}
+# ClusterSecretStore is managed by Flux in kubernetes-state/kubernetes-0/platform/external-secrets.yaml
