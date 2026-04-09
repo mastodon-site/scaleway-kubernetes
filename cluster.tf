@@ -27,14 +27,16 @@ resource "scaleway_k8s_cluster" "cluster" {
 }
 
 resource "scaleway_k8s_pool" "pools" {
-  for_each    = { for config in var.kubernetes_node_pools : config.pool_id => config }
-  cluster_id  = scaleway_k8s_cluster.cluster.id
-  name        = "pool-${each.value.pool_id}-${each.value.zone}"
-  node_type   = each.value.node_type
-  zone        = each.value.zone
-  autoscaling = each.value.autoscaling
-  autohealing = each.value.autohealing
-  size        = each.value.size
-  min_size    = each.value.min_size
-  max_size    = each.value.max_size
+  for_each               = { for config in var.kubernetes_node_pools : config.pool_id => config }
+  cluster_id             = scaleway_k8s_cluster.cluster.id
+  name                   = "pool-${each.value.pool_id}-${each.value.zone}"
+  node_type              = each.value.node_type
+  zone                   = each.value.zone
+  autoscaling            = each.value.autoscaling
+  autohealing            = each.value.autohealing
+  size                   = each.value.size
+  min_size               = each.value.min_size
+  max_size               = each.value.max_size
+  root_volume_type       = each.value.root_volume_type
+  root_volume_size_in_gb = each.value.root_volume_size_in_gb
 }
