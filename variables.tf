@@ -79,8 +79,22 @@ variable "kubernetes_cluster_version" {
 }
 
 variable "kubernetes_node_pools" {
-  description = "Node pool(s) to create for this Kubernetes cluster"
-  type        = list(map(string))
+  description = <<-EOT
+    Node pool(s) for the cluster. root_volume_type defaults to sbs_5k (block storage) and root_volume_size_in_gb to 20,
+    matching typical Scaleway Kapsule pool defaults when these are omitted. Override for local SSD (l_ssd), higher-performance block (sbs_15k), etc.
+  EOT
+  type = list(object({
+    pool_id                = number
+    node_type              = string
+    zone                   = string
+    autoscaling            = bool
+    autohealing            = bool
+    size                   = number
+    min_size               = number
+    max_size               = number
+    root_volume_type       = optional(string, "sbs_5k")
+    root_volume_size_in_gb = optional(number, 20)
+  }))
   default = [{
     pool_id     = 1
     node_type   = "play2_micro"
